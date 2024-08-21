@@ -15,25 +15,25 @@ class SeriesController extends Controller
           
     }
 
-    public function index()
+    public function index() //Read
     {
         return Series::all();
     }
 
-    public function store(SeriesFormRequest $request)
+    public function store(SeriesFormRequest $request) //Read
     {
         return response()
         ->json($this->seriesRepository->add($request),201);
     }
 
-    public function show(int $series)
+    public function show(int $series) //Create
     {
         $series = Series::whereId($series)->first();
 
         return $series;
     }
 
-    public function update(Series $series, SeriesFormRequest $request)
+    public function update(Series $series, SeriesFormRequest $request) //Update
     {
         $series->fill($request->all());
         $series->save();
@@ -42,7 +42,7 @@ class SeriesController extends Controller
     
     }
 
-    public function destroy(int $series)
+    public function destroy(int $series) //Delete
     {
         Series::destroy($series);
         return response()->noContent();
